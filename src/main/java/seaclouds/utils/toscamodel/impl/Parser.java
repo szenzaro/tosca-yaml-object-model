@@ -267,7 +267,9 @@ public final class Parser {
                     //Expect(value.is(Event.ID.MappingStart));
                     ParseMapping(value, it, (propname, ms) -> {
                         // TODO: add case for inline properties (needed?)
-                        Expect(ms.is(Event.ID.MappingStart));
+                        //Expect(ms.is(Event.ID.MappingStart));
+						if(!ms.is(Event.ID.MappingStart))
+							throw new RuntimeException("ms is not " + Event.ID.MappingStart + ": it is " + ms);
                         ParseProperty(ms,it,propname,properties);
                     });
                     break;
@@ -360,8 +362,13 @@ public final class Parser {
         });
         Expect(parentTypeName[0] != null);
         INamedEntity pt = env.getNamedEntity(parentTypeName[0]);
-        if(pt == null || !(pt instanceof INodeType))
-            throw new TypeError();
+
+        if(pt == null)
+            throw new RuntimeException("env.getNamedEntity(" + parentTypeName[0] + ") gave null");
+
+		if( !(pt instanceof INodeType) )
+			throw new RuntimeException("pt is not INodeType. It is " + pt.getClass().getSimpleName());
+
         INodeType newType = (INodeType)pt;
         newType = newType.addProperty(null,null,null);
         for(Map.Entry<String,? extends  IProperty> entry : properties.entrySet()) {
@@ -411,7 +418,7 @@ public final class Parser {
         Expect(typeName[0] != null);
         IType t = (IType)env.getNamedEntity(typeName[0]);
         if(t == null)
-            throw new TypeError();
+            throw new RuntimeException("env.getNamedEntity(\"" + typeName[0] + "\") gave null.");
         for(IConstraint c : constraints) {
             t  = t.coerce(c);
         }

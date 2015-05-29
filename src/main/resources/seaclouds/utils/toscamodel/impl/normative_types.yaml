@@ -38,7 +38,7 @@ datatype_definitions:
                     type: float
 
                 
-    seaclouds.types.QoSInfo:
+    seaclouds.types.QosInfo:
         properties:
           benchmark_platform:
             type: string
@@ -146,7 +146,7 @@ node_types:
       derived_from: tosca.nodes.Root
 
     seaclouds.nodes.deploy.MySQL:
-        derived_from: tosca.nodes.deploy
+        derived_from: seaclouds.nodes.deploy
         properties:
             port:
                 type: string
@@ -160,7 +160,7 @@ node_types:
                 type: string
 
     seaclouds.nodes.deploy.Tomcat:
-      derived_from: tosca.nodes.deploy
+      derived_from: seaclouds.nodes.deploy
       properties:
         name:
           type: string

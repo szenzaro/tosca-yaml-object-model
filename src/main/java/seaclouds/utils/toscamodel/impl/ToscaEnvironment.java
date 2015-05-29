@@ -31,7 +31,7 @@ public class ToscaEnvironment implements  IToscaEnvironment {
     private final TypeManager typeManager = new TypeManager(this);
     //private final ToscaTopology topology = new ToscaTopology(this);
     private static final String relName = "normative_types.yaml";
-    private static final String absName = "../resources/seaclouds/utils/toscamodel/impl/normative_types.yaml";
+    private static final String absName = "/seaclouds/utils/toscamodel/impl/normative_types.yaml";
 
     public ToscaEnvironment() {
         //ResourceBundle bundle = ResourceBundle.getBundle("seaclouds.utils.toscamodel.impl");
